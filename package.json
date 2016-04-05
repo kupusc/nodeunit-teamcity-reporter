@@ -1,10 +1,10 @@
 {
   "name": "nodeunit-teamcity-reporter",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "prints team-city special messages",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "test/integrationTest.sh"
   },
   "keywords": [
     "nodeunit",
@@ -22,5 +22,16 @@
   },
   "devDependencies": {
     "nodeunit": "^0.9.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kupusc/nodeunit-teamcity-reporter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kupusc/nodeunit-teamcity-reporter/issues"
+  },
+  "homepage": "https://github.com/kupusc/nodeunit-teamcity-reporter#readme"
 }

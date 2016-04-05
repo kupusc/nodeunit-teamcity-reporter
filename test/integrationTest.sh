@@ -84,5 +84,5 @@ x_test_case()
     echo "${INDENTAION}skipped"
 }
 
-_test_case "Unit tests must pass" "./node_modules/.bin/nodeunit ./indexTest.js"
-_test_case "Real example" "./node_modules/.bin/nodeunit --reporter $(_make_absolute_path "./index.js") ./exampleTests.js"
+_test_case "Unit tests must pass" "./node_modules/.bin/nodeunit ./test/indexTest.js"
+_test_case "Real example" "./node_modules/.bin/nodeunit --reporter $(_make_absolute_path ".") ./test/exampleTests.js"

@@ -6,6 +6,7 @@
 var path = require('path');
 var nodeunit = require('nodeunit');
 var tsm = require('teamcity-service-messages');
+var util = require('util');
 
 exports.info = "NodeUnit / Team-city reporter";
 
@@ -21,17 +22,17 @@ exports.run = function (files, options, callback) {
             tsm.testStarted({ name: name });
         },
         testDone: function (name, assertions) {
-            tsm.testFinished({ name: name });
-        },
-        done: function (assertions) {
             if (assertions.failures()) {
-                console.log('teamcity: done, failures');
+                assertions.forEach(function (assertion) {
+                    assertion.testname = name;
+                });
+                tsm.testFailed({name: name, message: 'Failed assertions count: ' + assertions.failures(), details: util.inspect(assertions)});
+            } else {
+                tsm.testFinished({name: name});
             }
-            else {
-                console.log('teamcity: done, no failures');
-            }
+        },
+        done: function(){
 
-            if (callback) callback(assertions.failures() ? new Error('Tests failed') : undefined);
         }
     };
 
