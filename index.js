@@ -27,12 +27,10 @@ exports.run = function (files, options, callback) {
                     assertion.testname = name;
                 });
                 tsm.testFailed({name: name, message: 'Failed assertions count: ' + assertions.failures(), details: util.inspect(assertions)});
-            } else {
-                tsm.testFinished({name: name});
             }
+            tsm.testFinished({name: name});
         },
-        done: function(){
-
+        done: function(assertions){
         }
     };
 
