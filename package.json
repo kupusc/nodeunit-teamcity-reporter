@@ -1,0 +1,26 @@
+{
+  "name": "nodeunit-teamcity-reporter",
+  "version": "1.0.0",
+  "description": "prints team-city special messages",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "nodeunit",
+    "testing",
+    "test",
+    "ut",
+    "mt",
+    "unit",
+    "tests"
+  ],
+  "author": "Adam Skobliński",
+  "license": "Unlicense",
+  "dependencies": {
+    "teamcity-service-messages": "^0.1.7"
+  },
+  "devDependencies": {
+    "nodeunit": "^0.9.1"
+  }
+}
