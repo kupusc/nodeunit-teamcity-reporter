@@ -5,22 +5,23 @@
 
 var path = require('path');
 var nodeunit = require('nodeunit');
+var tsm = require('teamcity-service-messages');
 
 exports.info = "NodeUnit / Team-city reporter";
 
 exports.run = function (files, options, callback) {
     var opts = {
         moduleStart: function (name) {
-            console.log('teamcity: start module');
+            tsm.testSuiteStarted({name: name});
         },
         moduleDone: function (name, assertions) {
-            console.log('teamcity: end module');
+            tsm.testSuiteFinished({name: name});
         },
         testStart: function (name) {
-            console.log('teamcity: start test');
+            tsm.testStarted({ name: name });
         },
         testDone: function (name, assertions) {
-            console.log('teamcity: end test');
+            tsm.testFinished({ name: name });
         },
         done: function (assertions) {
             if (assertions.failures()) {
