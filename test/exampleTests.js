@@ -24,6 +24,7 @@ module.exports = {
         testFail: function (test) {
             //test.done(false);
             test.equals(4, 3);
+            test.equals(4, -1);
             test.done();
         }
     }

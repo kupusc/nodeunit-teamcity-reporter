@@ -8,6 +8,10 @@ var nodeunit = require('nodeunit');
 var tsm = require('teamcity-service-messages');
 var util = require('util');
 
+function betterErrors(assertion) {
+    return util.inspect(assertion);
+}
+
 exports.info = "NodeUnit / Team-city reporter";
 
 exports.run = function (files, options, callback) {
@@ -22,11 +26,17 @@ exports.run = function (files, options, callback) {
             tsm.testStarted({ name: name });
         },
         testDone: function (name, assertions) {
+            var details = [];
             if (assertions.failures()) {
-                assertions.forEach(function (assertion) {
-                    assertion.testname = name;
+                assertions.forEach(function (a) {
+                    if (a.failed()) {
+                        var ba = betterErrors(a);
+                        details.push('\n\n------ detail ---------\n');
+                        details.push(ba);
+                    }
+                    a.testname = name;
                 });
-                tsm.testFailed({name: name, message: 'Failed assertions count: ' + assertions.failures(), details: util.inspect(assertions)});
+                tsm.testFailed({name: name, details: details});
             }
             tsm.testFinished({name: name});
         },
