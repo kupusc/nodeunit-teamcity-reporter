@@ -7,9 +7,24 @@ var path = require('path');
 var nodeunit = require('nodeunit');
 var tsm = require('teamcity-service-messages');
 var util = require('util');
+var _ = require('underscore');
 
 function betterErrors(assertion) {
-    return util.inspect(assertion);
+    var exists = function(x) {
+        return !(x === undefined || x == '' || x == null || typeof x == 'function' || _.isEmpty(x));
+    };
+
+    var cleanit = function(a) {
+        return _.pick(a, function(value, key, object) {
+            return exists(value);
+        });
+    };
+
+    var betterAssertion = {};
+    betterAssertion.error = cleanit(assertion.error);
+    betterAssertion = cleanit(assertion);
+
+    return util.inspect(betterAssertion);
 }
 
 exports.info = "NodeUnit / Team-city reporter";

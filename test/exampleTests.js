@@ -25,6 +25,7 @@ module.exports = {
             //test.done(false);
             test.equals(4, 3);
             test.equals(4, -1);
+            throw new Error('kupadupa');
             test.done();
         }
     }
