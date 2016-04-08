@@ -11,7 +11,7 @@ var _ = require('underscore');
 
 function betterErrors(assertion) {
     var exists = function(x) {
-        return !(x === undefined || x == '' || x == null || typeof x == 'function' || _.isEmpty(x));
+        return !(x == undefined || x == '' || x == null || typeof x == 'function' || _.isObject(x) && _.isEmpty(x) || x == 'undefined');
     };
 
     var cleanit = function(a) {
@@ -21,8 +21,10 @@ function betterErrors(assertion) {
     };
 
     var betterAssertion = {};
-    betterAssertion.error = cleanit(assertion.error);
     betterAssertion = cleanit(assertion);
+    if(betterAssertion.error) {
+        betterAssertion.error = cleanit(assertion.error);
+    }
 
     return util.inspect(betterAssertion);
 }
