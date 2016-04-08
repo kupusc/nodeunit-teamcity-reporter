@@ -1,6 +1,6 @@
 {
   "name": "nodeunit-teamcity-reporter",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "prints team-city special messages",
   "main": "index.js",
   "scripts": {
